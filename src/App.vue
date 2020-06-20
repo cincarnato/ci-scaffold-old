@@ -1,28 +1,34 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+    <v-app>
+        <layout :menu="menu">
+            <template v-slot:toolbar-left>
+                a
+            </template>
+
+            <template v-slot:toolbar-right>
+                <dashboard-button />
+                <app-bar-user-menu />
+            </template>
+
+
+            <router-view></router-view>
+        </layout>
+    </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
 
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+    import Layout from "./layout/Layout";
+    import menuConfig from './menu-config'
+    import {DashboardButton, AppBarUserMenu} from 'ci-user-module'
+
+    export default {
+        name: 'App',
+        components: {Layout,DashboardButton,AppBarUserMenu},
+        data(){
+            return {
+                menu: menuConfig
+            }
+        }
+    };
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
